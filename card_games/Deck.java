@@ -1,11 +1,10 @@
+package card_games;
+
 /**
  * Author: Demetrius Semanko
  * Purpose: This class is designed to represent a basic Deck in a card game.
  * It can represent a shoe, a deck, or be extended to represent hands in a game.
- * Every Deck instance should contain
  */
-
-package card_games;
 
 import java.util.ArrayList;
 import java.util.Random;

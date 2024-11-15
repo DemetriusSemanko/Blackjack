@@ -1,12 +1,20 @@
 package card_games;
 
+/**
+ * Author: Demetrius Semanko
+ * Purpose: This class is designed to represent a Card in a card game.
+ * Every Card has a rank, a suit, and a state of revelation.
+ */
+
 import java.util.Random;
 
 public class Card {
     private String rank;
     private String suit;
     private boolean revealed;
-
+    /**
+     * 
+     */
     public static final String[] RANKS = {
         "Ace",
         "Two",
