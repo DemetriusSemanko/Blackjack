@@ -104,7 +104,7 @@ public class Blackjack {
     /**
      * Handles the looping of the player's hand. First it generates and displays the options available to the user
      * based off of the dealer's and player's hand. Then the user makes their choice, the choice's changes/effects
-     * are made, and then conditions for terminating the overall loop at assessed and applied.
+     * are made, and then conditions for terminating the overall loop are assessed and applied.
      * @param shoe the reference to the shoe which contains the undealt playing cards
      * @param playerHand the reference to a single instance of type Player_Hand
      * @param dealerHand the reference to a single instance of type Blackjack_Dealer
@@ -143,7 +143,7 @@ public class Blackjack {
         }
     }
     /**
-     * A dynamic function which can print the hand of both 
+     * A function which can print the hand of both 
      * Blackjack_Dealer and Player_Hand types thanks to their inheritance from Deck
      * @param handHolder the "name"/"assignment" of the hand. Used in displaying ownership
      * @param hand the Deck-type reference to the handholder's hand
@@ -165,7 +165,7 @@ public class Blackjack {
         System.out.println("You will play against the dealer.");
         System.out.println("You will both draw from the shoe.");
         System.out.println("The shoe can have any number of decks.");
-        System.out.println("As always, the shoe is shuffled.\n");
+        System.out.println("The shoe is shuffled.\n");
     }
     /**
      * Returns boolean-type value that determines if the player wants to
@@ -181,7 +181,7 @@ public class Blackjack {
         }
         if (reply.toUpperCase().equals("Y")) {
             return false;
-        } else {
+        } else { // Due to boolean conditions in previous while-loop header, if answer wasn't Y, it must be N
             return true;
         }
     }
@@ -190,7 +190,7 @@ public class Blackjack {
      * @return int-type value that represents the number of desired decks in the shoe.
      */
     public static int getShoeSize() {
-        System.out.print("\nHow many decks would you like to be in the shoe?: ");
+        System.out.print("\nHow many decks would you like to have in the shoe?: ");
         Scanner sc = new Scanner(System.in);
         int shoeSize = 0;
 
@@ -224,7 +224,7 @@ public class Blackjack {
         dealerHand.getCard(0).setRevealed(false);
     }
     /**
-     * Calculates and returns an ArrayList<String> instance which contains the available player choices.
+     * Calculates, populates, and returns an ArrayList<String> instance which contains the available player choices.
      * @param playerHand the reference to the player hand
      * @param dealerHand the reference to the dealer hand
      * @return an ArrayList<String> instance which contains the available player choices
@@ -238,7 +238,7 @@ public class Blackjack {
                     choices.add(SPLIT);
                 }
                 
-                if (dealerHand.getCard(1).getRank().toLowerCase().equals("ace")) {
+                if (dealerHand.getCard(1).getRank().equals(Card.RANKS[0])) { // Card.RANKS[0] == "Ace"
                     choices.add(INSURANCE);
                 }
             }
