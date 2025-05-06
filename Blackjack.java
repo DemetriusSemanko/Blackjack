@@ -64,7 +64,7 @@ public class Blackjack {
                     //printHand(PLAYER, playerHand);
 
                     // TimeUnit.SECONDS.sleep(1);
-                    if (getCardValueTotalBlackjack(dealerHand, false) >= 17) {
+                    if (getCardValueTotalBlackjack(dealerHand) >= 17) {
                         dealerHandEnd = true;
                     } else {
                         dealerHand.addCard(shoe.drawCard(false));
