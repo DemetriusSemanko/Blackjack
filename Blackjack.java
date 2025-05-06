@@ -346,10 +346,15 @@ public class Blackjack {
         }
     }
     /**
-     * 
+     * A method for calculating the total of the passed hand. This method makes it so
+     * that any unreveled cards are not added to the total (to maintain the hidden-ness
+     * of the hole card).
+     * @param hand a Deck-type object representing the hand that is to be totaled
+     * @param ignoreRevealed a flag for if we should count the revealed cards
+     * @return the total of the hand, depending on if revealed cards should be ignored
      */
-    public static int getCardValueTotalBlackjack(Deck hand, boolean ignoreRevealed) {
-        int sum = hand.getCardValueTotal(ignoreRevealed);
+    public static int getCardValueTotalBlackjack(Deck hand) {
+        int sum = hand.getCardValueTotal(false);
         for (int i = 0; i < hand.size(); i++) {
             if (hand.getCard(i).getRank().equals("Ace") && hand.getCard(i).getRevealed() == true) {
                 if (sum + 10 < 22) { sum += 10; }
