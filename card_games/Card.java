@@ -13,7 +13,7 @@ public class Card {
     private String suit;
     private boolean revealed;
     /**
-     * 
+     * String array of all possible card ranks in the Western card deck 
      */
     public static final String[] RANKS = {
         "Ace",
@@ -30,7 +30,9 @@ public class Card {
         "Queen",
         "King"
     };
-
+    /*
+     * String array of all possible card suits in the Western card deck
+     */
     public static final String[] SUITS = {
         "Clubs",
         "Spades",
@@ -92,8 +94,8 @@ public class Card {
             case "Jack": return 10;
             case "Queen": return 10;
             case "King": return 10;
-        }
-        return 0;
+       	    default: return 0;
+	}
     }
     /** 
      * Returns the String-type suit of this instance of Card

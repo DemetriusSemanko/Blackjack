@@ -128,7 +128,10 @@ public class Deck {
 
         return sum;
     }
-
+    /**
+     * Returns the String representation of this Deck
+     * @return the String representation of this Deck
+     */
     public String toString() {
         String outString = "";
         for (int i = 0; i < this.deck.size(); i++) {
