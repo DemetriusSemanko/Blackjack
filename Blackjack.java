@@ -123,9 +123,9 @@ public class Blackjack {
 
             if (playerHand.getIsStanding()) {
                 playerHandEnd = true;
-            } else if (getCardValueTotalBlackjack(playerHand, false) > 21) {
+            } else if (getCardValueTotalBlackjack(playerHand) > 21) {
                 playerHandEnd = true;
-            } else if (getCardValueTotalBlackjack(playerHand, false) == 21) {
+            } else if (getCardValueTotalBlackjack(playerHand) == 21) {
                 System.out.println("\nBlackjack!");
                 playerHandEnd = true;
             }
@@ -153,7 +153,7 @@ public class Blackjack {
         System.out.println(hand.toString());
 
         int sum = 0;
-        sum = getCardValueTotalBlackjack(hand, false);
+        sum = getCardValueTotalBlackjack(hand);
 
         System.out.println(handHolder + "'S HAND TOTAL: " + sum);
     }
@@ -243,7 +243,7 @@ public class Blackjack {
                 }
             }
         }
-        if (getCardValueTotalBlackjack(playerHand, false) < 21) {
+        if (getCardValueTotalBlackjack(playerHand) < 21) {
             choices.add(HIT);
             choices.add(STAND);
         }
@@ -317,8 +317,8 @@ public class Blackjack {
      */
     public static void printHandResolution(Player_Hand playerHand, Blackjack_Dealer dealerHand) {
         String result = "DEFAULT";
-        int playerHandValueTotal = getCardValueTotalBlackjack(playerHand, false);
-        int dealerHandValueTotal = getCardValueTotalBlackjack(dealerHand, false);
+        int playerHandValueTotal = getCardValueTotalBlackjack(playerHand);
+        int dealerHandValueTotal = getCardValueTotalBlackjack(dealerHand);
 
         if (playerHandValueTotal > 21) { result = BUST; }
         else if (playerHandValueTotal == dealerHandValueTotal) { result = PUSH; }
