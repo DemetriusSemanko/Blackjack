@@ -35,15 +35,15 @@ public class Blackjack {
             shoe.addDeck(shoeSize);
             shoe.shuffle(5);
             /**
-             * Declaring an ArrayList of type Player_Hand. Initializing it with
-             * an instance of Player_Hand.
+             * Declaring an ArrayList of type PlayerHand. Initializing it with
+             * an instance of PlayerHand.
              */
-            ArrayList<Player_Hand> playerHand = new ArrayList<Player_Hand>();
-            playerHand.add(new Player_Hand());
+            ArrayList<PlayerHand> playerHand = new ArrayList<PlayerHand>();
+            playerHand.add(new PlayerHand());
             /**
-             * Declaring one instance of type Blackjack_Dealer
+             * Declaring one instance of type BlackjackDealer
              */
-            Blackjack_Dealer dealerHand = new Blackjack_Dealer(false);
+            BlackjackDealer dealerHand = new BlackjackDealer();
 
             System.out.println(SPACER_LONG + "BALANCE: " + playerBalance + SPACER_LONG);
 
@@ -106,11 +106,11 @@ public class Blackjack {
      * based off of the dealer's and player's hand. Then the user makes their choice, the choice's changes/effects
      * are made, and then conditions for terminating the overall loop are assessed and applied.
      * @param shoe the reference to the shoe which contains the undealt playing cards
-     * @param playerHand the reference to a single instance of type Player_Hand
-     * @param dealerHand the reference to a single instance of type Blackjack_Dealer
-     * @param playerHands the refernece to an ArrayList of type Player_Hand (which contains all of the player's hands)
+     * @param playerHand the reference to a single instance of type PlayerHand
+     * @param dealerHand the reference to a single instance of type BlackjackDealer
+     * @param playerHands the refernece to an ArrayList of type PlayerHand (which contains all of the player's hands)
      */
-    public static void playerHandLoop(Deck shoe, Player_Hand playerHand, Blackjack_Dealer dealerHand, ArrayList<Player_Hand> playerHands) {
+    public static void playerHandLoop(Deck shoe, PlayerHand playerHand, BlackjackDealer dealerHand, ArrayList<PlayerHand> playerHands) {
         boolean playerHandEnd = false;
         while(!playerHandEnd) {
             printHand(PLAYER, playerHand);
@@ -144,7 +144,7 @@ public class Blackjack {
     }
     /**
      * A function which can print the hand of both 
-     * Blackjack_Dealer and Player_Hand types thanks to their inheritance from Deck
+     * BlackjackDealer and PlayerHand types thanks to their inheritance from Deck
      * @param handHolder the "name"/"assignment" of the hand. Used in displaying ownership
      * @param hand the Deck-type reference to the handholder's hand
      */
@@ -216,7 +216,7 @@ public class Blackjack {
      * @param playerHand the reference to the player hand
      * @param dealerHand the reference to the dealer hand
      */
-    public static void initialDeal(Deck shoe, Player_Hand playerHand, Blackjack_Dealer dealerHand) {
+    public static void initialDeal(Deck shoe, PlayerHand playerHand, BlackjackDealer dealerHand) {
         for (int i = 1; i <= 2; i++) {
             playerHand.addCard(shoe.drawCard(false));
             dealerHand.addCard(shoe.drawCard(false));
@@ -229,7 +229,7 @@ public class Blackjack {
      * @param dealerHand the reference to the dealer hand
      * @return an ArrayList<String> instance which contains the available player choices
      */
-    public static ArrayList<String> playerChoices(Player_Hand playerHand, Blackjack_Dealer dealerHand) {
+    public static ArrayList<String> playerChoices(PlayerHand playerHand, BlackjackDealer dealerHand) {
         ArrayList<String> choices = new ArrayList<String>();
         if (playerHand.size() > 1) {
             if (playerHand.getIsNewHand()) {
@@ -284,14 +284,14 @@ public class Blackjack {
         return choiceStr;
     }
     /**
-     * Makes the changes to the passed Player_Hand-type instance based on the choice made by the player.
+     * Makes the changes to the passed PlayerHand-type instance based on the choice made by the player.
      * @param shoe the reference to the shoe which contains the undealt playing cards
      * @param playerHand the reference to the player hand
      * @param dealerHand the reference to the dealer hand
      * @param choice the player's choice
-     * @param playerHands an ArrayList of type Player_Hand which contains all player hands
+     * @param playerHands an ArrayList of type PlayerHand which contains all player hands
      */
-    public static void makeChanges(Deck shoe, Player_Hand playerHand, Blackjack_Dealer dealerHand, String choice, ArrayList<Player_Hand> playerHands) {
+    public static void makeChanges(Deck shoe, PlayerHand playerHand, BlackjackDealer dealerHand, String choice, ArrayList<PlayerHand> playerHands) {
         if (choice.equals(HIT)) {
             playerHand.addCard(shoe.drawCard(false));
             playerHand.setIsNewHand(false);
@@ -301,7 +301,7 @@ public class Blackjack {
         }
         
         if (choice.equals(SPLIT)) {
-            playerHands.add(new Player_Hand());
+            playerHands.add(new PlayerHand());
             playerHands.get(playerHands.size() - 1).addCard(playerHand.drawCard(false));
             playerHandLoop(shoe, playerHands.get(playerHands.size() - 1), dealerHand, playerHands);
         }
@@ -315,7 +315,7 @@ public class Blackjack {
      * @param playerHand the reference to the player hand
      * @param dealerHand the reference to the dealer hand
      */
-    public static void printHandResolution(Player_Hand playerHand, Blackjack_Dealer dealerHand) {
+    public static void printHandResolution(PlayerHand playerHand, BlackjackDealer dealerHand) {
         String result = "DEFAULT";
         int playerHandValueTotal = getCardValueTotalBlackjack(playerHand);
         int dealerHandValueTotal = getCardValueTotalBlackjack(dealerHand);
@@ -334,13 +334,13 @@ public class Blackjack {
     }
     /**
      * Prints the results of the entire game. It first prints the dealer hand, then it prints the player hand/s.
-     * @param playerHands an ArrayList of type Player_Hand which contains all player hands
+     * @param playerHands an ArrayList of type PlayerHand which contains all player hands
      * @param dealerHand the reference to the dealer hand
      */
-    public static void printResults(ArrayList<Player_Hand> playerHands, Blackjack_Dealer dealerHand) {
+    public static void printResults(ArrayList<PlayerHand> playerHands, BlackjackDealer dealerHand) {
         System.out.println(SPACER_LONG + "RESULTS" + SPACER_LONG);
         printHand(DEALER, dealerHand);
-        for (Player_Hand hand : playerHands) {
+        for (PlayerHand hand : playerHands) {
             printHand(PLAYER, hand);
             printHandResolution(hand, dealerHand);
         }
