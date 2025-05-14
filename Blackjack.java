@@ -126,7 +126,7 @@ public class Blackjack {
             } else if (getCardValueTotalBlackjack(playerHand) > 21) {
                 playerHandEnd = true;
             } else if (getCardValueTotalBlackjack(playerHand) == 21) {
-                System.out.println("\nBlackjack!");
+                System.out.println(BLACKJACK);
                 playerHandEnd = true;
             }
         }
