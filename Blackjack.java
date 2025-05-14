@@ -1,9 +1,7 @@
 import card_games.Card;
 import card_games.Deck;
 import java.util.Scanner;
-import java.util.Arrays;
 import java.util.ArrayList;
-// import java.util.concurrent.TimeUnit;
 
 public class Blackjack {
     public static final String HIT = "HIT";
@@ -19,6 +17,8 @@ public class Blackjack {
     public static final String BLACKJACK = "BLACKJACK";
     public static final String SPACER = "---";
     public static final String SPACER_LONG = "---------";
+
+    private static final Scanner KEYBOARD = new Scanner(System.in);
 
     public static void main(String[] args) /* throws InterruptedException */ {
         introduction();
@@ -88,17 +88,17 @@ public class Blackjack {
         boolean done = false;
         while (!done) {
             System.out.print("Please enter a whole integer buy in: $");
-            Scanner keyboard = new Scanner(System.in);
-            String entry = keyboard.nextLine();
+            String entry = KEYBOARD.nextLine();
             Scanner lineScan = new Scanner(entry);
             if (lineScan.hasNextInt()) {
                 playerBuyIn = lineScan.nextInt();
                 if (playerBuyIn > 0) {
+                    lineScan.close();
                     done = true;
                 }
             }
         }
-
+        
         return playerBuyIn;
     }
     /**
@@ -126,7 +126,7 @@ public class Blackjack {
             } else if (getCardValueTotalBlackjack(playerHand) > 21) {
                 playerHandEnd = true;
             } else if (getCardValueTotalBlackjack(playerHand) == 21) {
-                System.out.println("\nBlackjack!");
+                System.out.println(BLACKJACK);
                 playerHandEnd = true;
             }
         }
@@ -173,11 +173,10 @@ public class Blackjack {
      * @return boolean-type value representing the choice for another game
      */
     public static boolean isNotDone() {
-        Scanner sc = new Scanner(System.in);
         String reply = "";
         while (!reply.toUpperCase().equals("Y") && !reply.toUpperCase().equals("N")) {
             System.out.print("\nDo you want to play again? (Y/N): ");
-            reply = sc.nextLine();
+            reply = KEYBOARD.nextLine();
         }
         if (reply.toUpperCase().equals("Y")) {
             return false;
@@ -191,16 +190,16 @@ public class Blackjack {
      */
     public static int getShoeSize() {
         System.out.print("\nHow many decks would you like to have in the shoe?: ");
-        Scanner sc = new Scanner(System.in);
         int shoeSize = 0;
 
         boolean done = false;
         while (!done) {
-            String line = sc.nextLine();
+            String line = KEYBOARD.nextLine();
             Scanner lineScan = new Scanner(line);
             if (lineScan.hasNextInt()) {
-                done = true;
                 shoeSize = lineScan.nextInt();
+                lineScan.close();
+                done = true;
             } else {
                 System.out.print("\nPlease enter an integer number: ");
             }
@@ -262,16 +261,15 @@ public class Blackjack {
         while (!validChoice) {
             boolean done = false;
             while (!done) {
-                Scanner sc = new Scanner(System.in);
-
                 System.out.print("Please enter the number which corresponds to your desired move: ");
-                String line = sc.nextLine();
+                String line = KEYBOARD.nextLine();
 
                 Scanner lineScan = new Scanner(line);
 
                 if (lineScan.hasNextInt()) {
-                    done = true;
                     choiceNum = lineScan.nextInt();
+                    lineScan.close();
+                    done = true;
                 }
             }
 
