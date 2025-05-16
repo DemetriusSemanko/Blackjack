@@ -20,11 +20,10 @@ public class Blackjack {
 
     private static final Scanner KEYBOARD = new Scanner(System.in);
 
-    public static void main(String[] args) /* throws InterruptedException */ {
+    public static void main(String[] args) {
         introduction();
 
         int shoeSize = getShoeSize();
-        int playerBalance = getPlayerBuyIn();
         boolean doneFinal = false;
         while(!doneFinal) {
             /**
@@ -45,7 +44,6 @@ public class Blackjack {
              */
             BlackjackDealer dealerHand = new BlackjackDealer();
 
-            System.out.println(SPACER_LONG + "BALANCE: " + playerBalance + SPACER_LONG);
 
             initialDeal(shoe, playerHand.get(0), dealerHand);
             printHand(DEALER, dealerHand);
@@ -61,9 +59,7 @@ public class Blackjack {
                 boolean dealerHandEnd = false;
                 while(!dealerHandEnd) {
                     printHand(DEALER, dealerHand);
-                    //printHand(PLAYER, playerHand);
 
-                    // TimeUnit.SECONDS.sleep(1);
                     if (getCardValueTotalBlackjack(dealerHand) >= 17) {
                         dealerHandEnd = true;
                     } else {
