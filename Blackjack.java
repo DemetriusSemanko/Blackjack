@@ -74,6 +74,7 @@ public class Blackjack {
         }
     }
     /**
+     * CORE
      * Returns the requested buy-in amount from the user. This is only asked once during
      * a single loop of the overall game. The buy-in must be greater than 0.
      * @return the requested buy-in amount
@@ -98,6 +99,7 @@ public class Blackjack {
         return playerBuyIn;
     }
     /**
+     * CORE
      * Handles the looping of the player's hand. First it generates and displays the options available to the user
      * based off of the dealer's and player's hand. Then the user makes their choice, the choice's changes/effects
      * are made, and then conditions for terminating the overall loop are assessed and applied.
@@ -128,6 +130,7 @@ public class Blackjack {
         }
     }
     /**
+     * TEXT-BASED
      * Simple function which abstracts the loop for displaying the player's options.
      * @param options the options generated based on hand information, stored as ArrayList of type String
      */
@@ -154,6 +157,7 @@ public class Blackjack {
         System.out.println(handHolder + "'S HAND TOTAL: " + sum);
     }
     /**
+     * TEXT-BASED
      * A simple introduction that is displayed to the user upon program execution
      */
     public static void introduction() {
@@ -164,6 +168,7 @@ public class Blackjack {
         System.out.println("The shoe is shuffled.\n");
     }
     /**
+     * CORE
      * Returns boolean-type value that determines if the player wants to
      * play another game.
      * @return boolean-type value representing the choice for another game
@@ -181,6 +186,7 @@ public class Blackjack {
         }
     }
     /**
+     * TEXT-BASED
      * Returns int-type value that represents the number of desired decks in the shoe.
      * @return int-type value that represents the number of desired decks in the shoe.
      */
@@ -219,6 +225,7 @@ public class Blackjack {
         dealerHand.getCard(0).setRevealed(false);
     }
     /**
+     * CORE
      * Calculates, populates, and returns an ArrayList<String> instance which contains the available player choices.
      * @param playerHand the reference to the player hand
      * @param dealerHand the reference to the dealer hand
@@ -246,6 +253,7 @@ public class Blackjack {
         return choices;
     }
     /**
+     * TEXT-BASED
      * Parses and returns the player's choice after they are presented with their available player choices.
      * The choice is verified: first if it is int-type; second if it falls within the range of choices.
      * @param choices the reference to the available player choices
@@ -278,6 +286,7 @@ public class Blackjack {
         return choiceStr;
     }
     /**
+     * CORE
      * Makes the changes to the passed PlayerHand-type instance based on the choice made by the player.
      * @param shoe the reference to the shoe which contains the undealt playing cards
      * @param playerHand the reference to the player hand
@@ -289,22 +298,18 @@ public class Blackjack {
         if (choice.equals(HIT)) {
             playerHand.addCard(shoe.drawCard(false));
             playerHand.setIsNewHand(false);
-        }
-        if (choice.equals(STAND)) {
+        } else if (choice.equals(STAND)) {
             playerHand.setIsStanding(true);
-        }
-        
-        if (choice.equals(SPLIT)) {
+        } else if (choice.equals(SPLIT)) {
             playerHands.add(new PlayerHand());
             playerHands.get(playerHands.size() - 1).addCard(playerHand.drawCard(false));
             playerHandLoop(shoe, playerHands.get(playerHands.size() - 1), dealerHand, playerHands);
-        }
-        
-        if (choice.equals(INSURANCE)) {
+        } else if (choice.equals(INSURANCE)) {
             playerHand.setIsNewHand(false);
         }
     }
     /**
+     * TEXT-BASED
      * Prints the resolution of the hand. It does so by comparing the sums of the player and dealer hands.
      * @param playerHand the reference to the player hand
      * @param dealerHand the reference to the dealer hand
@@ -327,6 +332,7 @@ public class Blackjack {
         System.out.println(result);
     }
     /**
+     * TEXT-BASED
      * Prints the results of the entire game. It first prints the dealer hand, then it prints the player hand/s.
      * @param playerHands an ArrayList of type PlayerHand which contains all player hands
      * @param dealerHand the reference to the dealer hand
@@ -340,11 +346,11 @@ public class Blackjack {
         }
     }
     /**
+     * CORE
      * A method for calculating the total of the passed hand. This method makes it so
-     * that any unreveled cards are not added to the total (to maintain the hidden-ness
-     * of the hole card).
+     * that any hidden cards are not added to the total. This is to maintain the
+     * hidden-ness of the hole card.
      * @param hand a Deck-type object representing the hand that is to be totaled
-     * @param ignoreRevealed a flag for if we should count the revealed cards
      * @return the total of the hand, depending on if revealed cards should be ignored
      */
     public static int getCardValueTotalBlackjack(Deck hand) {
