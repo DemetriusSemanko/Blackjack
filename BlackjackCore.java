@@ -4,24 +4,41 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class BlackjackCore {
+    // Blackjack moves
     public static final String HIT = "HIT";
     public static final String STAND = "STAND";
     public static final String SPLIT = "SPLIT";
     public static final String INSURANCE = "INSURANCE";
+    public enum Moves {
+	    HIT, STAND, SPLIT, INSURANCE
+    }
+    // Hand identifiers
+    // Consider changing this
     public static final String PLAYER = "PLAYER";
     public static final String DEALER = "DEALER";
+    // Hand results
     public static final String BUST = "BUST";
     public static final String PUSH = "PUSH";
     public static final String LOSS = "LOSS";
     public static final String WIN = "WIN";
     public static final String BLACKJACK = "BLACKJACK";
-
+    public enum Results {
+	    BUST, PUSH, LOSS, WIN, BLACKJACK
+    }
+    /**
+     * Blackjack game state which tracks the shoe, all hands
+     * (player and dealer), and the game's state of completition
+     */
     private ArrayList<PlayerHand> playerHands = new ArrayList<>();
     private BlackjackDealer dealerHand = new BlackjackDealer();
     private Deck shoe = new Deck();
     private int playerBalance = 0;
     private boolean done = false;
-
+    
+    /**
+     * Constructs a new instance of the Blackjack class,
+     * where a new Blackjack game begins
+     */
     public Blackjack(int shoeSize) {
         shoe.addDeck(shoeSize);
         PlayerHand initialPlayerHand = new PlayerHand();
